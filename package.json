@@ -6,11 +6,12 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^6",
+    "@sap/cds": "^6.7.0",
     "express": "^4"
   },
   "devDependencies": {
     "@sap/ux-specification": "^1.108.1",
+    "cds-swagger-ui-express": "^0.6.0",
     "sqlite3": "^5"
   },
   "scripts": {
