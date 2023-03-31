@@ -111,7 +111,8 @@
                                         "route": "RisksObjectPage"
                                     }
                                 }
-                            }
+                            },
+                            "initialLoad": "Enabled"
                         }
                     }
                 },
