@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "../model/formatter",
     "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast"
+], function (BaseController, JSONModel, formatter, Filter, FilterOperator, MessageToast) {
     "use strict";
 
     return BaseController.extend("ns.mitigations.controller.Worklist", {
@@ -35,6 +36,29 @@ sap.ui.define([
             this.setModel(oViewModel, "worklistView");
 
         },
+        onCreate : function () {
+            MessageToast.show("Bound action with parameters successfully invoked");
+			var oList = this.byId("worklist"),
+				oBinding = oList.getBinding("items"),
+				oContext = oBinding.create({
+					// "UserName" : "",
+					// "FirstName" : "",
+					// "LastName" : "",
+					// "Age" : "18"
+				});
+               
+
+			this._setUIChanges();
+			this.getView().getModel("worklistView").setProperty();
+
+			oList.getItems().some(function (oItem) {
+				if (oItem.getBindingContext() === oContext) {
+					oItem.focus();
+					oItem.setSelected(true);
+					return true;
+				}
+			});
+		},
 
         /* =========================================================== */
         /* event handlers                                              */

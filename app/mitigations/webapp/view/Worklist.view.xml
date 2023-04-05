@@ -2,7 +2,12 @@
     controllerName="ns.mitigations.controller.Worklist"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:semantic="sap.f.semantic">
+    xmlns:semantic="sap.f.semantic"
+   
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:macros="sap.fe.macros"
+    >
 
     <semantic:SemanticPage
         id="page"
@@ -39,6 +44,15 @@
                             text="{worklistView>/worklistTableTitle}"
                             level="H3"/>
                         <ToolbarSpacer />
+                        <Button
+											id="addUserButton"
+											icon="sap-icon://add"
+                                            text="Create"
+                                            type="Default"
+											tooltip="{i18n>createButtonText}"
+											press=".onCreate">
+											
+										</Button>
                         <SearchField
                             id="searchField"
                             tooltip="{i18n>worklistSearchTooltip}"
@@ -86,5 +100,10 @@
         </semantic:sendEmailAction>
 
     </semantic:SemanticPage>
+                 <!-- <Page>
+        <content>
+            <macros:Table contextPath="/Mitigations" metaPath="@com.sap.vocabularies.UI.v1.LineItem#Mitigations" id="macroTable" />
+        </content>
+    </Page> -->
 
 </mvc:View>

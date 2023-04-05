@@ -121,6 +121,7 @@ resources:
 - name: cpapp-uaa
   type: org.cloudfoundry.managed-service
   parameters:
+
     config:
       role-collections:
       - description: Manage Risks
@@ -132,10 +133,12 @@ resources:
         role-template-references:
         - $XSAPPNAME.RiskViewer
       tenant-mode: dedicated
+
       xsappname: cpapp-${org}-${space}
     path: ./xs-security.json
     service: xsuaa
     service-plan: application
+    
 - name: cpapp-destination
   type: org.cloudfoundry.managed-service
   parameters:
