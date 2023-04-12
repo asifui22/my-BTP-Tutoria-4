@@ -1,55 +1,66 @@
 {
-    "name": "cpapp",
-    "version": "1.0.0",
-    "description": "A simple CAP project.",
-    "repository": "<Add your repository here>",
-    "license": "UNLICENSED",
-    "private": true,
-    "dependencies": {
-        "@sap/cds": "^6.7.0",
-        "@sap/xssec": "^3",
-        "express": "^4",
-        "hdb": "^0.19.0",
-        "passport": "^0"
-    },
-    "devDependencies": {
-        "@sap/ux-specification": "^1.108.2",
-        "cds-swagger-ui-express": "^0.6.0",
-        "rimraf": "^3.0.2",
-        "sqlite3": "^5"
-    },
-    "engines": {
-        "node": "^16"
-    },
-    "scripts": {
-        "start": "cds-serve",
-        "watch-risks": "cds watch --open risks/webapp/index.html?sap-ui-xx-viewCache=false",
-        "watch-mitigations": "cds watch --open mitigations/webapp/index.html?sap-ui-xx-viewCache=false",
-        "undeploy": "cf undeploy cpapp --delete-services --delete-service-keys --delete-service-brokers",
-        "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
-    },
-    "sapux": [
-        "app/risks",
-        "app/mitigations"
-    ],
-    "cds": {
-        "requires": {
-            "db": {
-                "kind": "sql",
-                "credentials": {
-                    "database": "db.sqlite"
-                }
-            },
-            "[production]": {
-                "db": {
-                    "kind": "hana-cloud"
-                },
-                "auth": {
-                    "kind": "xsuaa",
-                    "restrict_all_services": false
-                }
-            }
+  "name": "cpapp",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^3.1.0",
+    "@sap-cloud-sdk/util": "^3.1.0",
+    "@sap/cds": "^6.7.0",
+    "@sap/xssec": "^3",
+    "express": "^4",
+    "hdb": "^0.19.0",
+    "passport": "^0"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.108.2",
+    "cds-swagger-ui-express": "^0.6.0",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5"
+  },
+  "engines": {
+    "node": "^16"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-risks": "cds watch --open risks/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-mitigations": "cds watch --open mitigations/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy cpapp --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "sapux": [
+    "app/risks",
+    "app/mitigations"
+  ],
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "db.sqlite"
         }
+      },
+      "[production]": {
+        "db": {
+          "kind": "hana-cloud"
+        },
+        "auth": {
+          "kind": "xsuaa",
+          "restrict_all_services": false
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "[sandbox]": {
+          "credentials": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+          }
+        }
+      }
     }
+  }
 }
